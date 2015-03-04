@@ -12,6 +12,7 @@ import javax.swing.JTree;
 import javax.swing.JTextField;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JLabel;
@@ -85,7 +86,9 @@ public class GUI extends JFrame {
 		scrollpanecontentTabel.setBounds(161, 34, 623, 506);
 		contentPane.add(scrollpanecontentTabel);
 		
-		contentTree = new JTree();
+		DefaultMutableTreeNode top = new DefaultMutableTreeNode("Test");
+		createNodes(top);
+		contentTree = new JTree(top);
 		scrollpanecontentTree.setViewportView(contentTree);
 		
 		queryField = new JTextField();
@@ -116,5 +119,15 @@ public class GUI extends JFrame {
 		limitto.setText("bis");
 		limitto.setBounds(248, 545, 150, 20);
 		contentPane.add(limitto);
+	}
+	private void createNodes(DefaultMutableTreeNode top){
+		DefaultMutableTreeNode category = null;
+		DefaultMutableTreeNode book = null;
+		
+		category  = new DefaultMutableTreeNode("Cate");
+		top.add(category);
+		
+		book = new DefaultMutableTreeNode("book");
+		category.add(book);
 	}
 }
