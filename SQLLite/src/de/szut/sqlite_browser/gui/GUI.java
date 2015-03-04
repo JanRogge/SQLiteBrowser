@@ -78,11 +78,10 @@ public class GUI extends JFrame {
 		contentPane.setLayout(null);
 		
 		scrollpanecontentTree = new JScrollPane();
-		scrollpanecontentTree.setBounds(5, 5, 146, 535);
+		scrollpanecontentTree.setBounds(5, 4, 146, 536);
 		contentPane.add(scrollpanecontentTree);
 		
 		scrollpanecontentTabel = new JScrollPane();
-		scrollpanecontentTabel.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scrollpanecontentTabel.setBounds(161, 34, 623, 506);
 		contentPane.add(scrollpanecontentTabel);
 		
@@ -90,7 +89,7 @@ public class GUI extends JFrame {
 		scrollpanecontentTree.setViewportView(contentTree);
 		
 		queryField = new JTextField();
-		queryField.setBounds(161, 3, 623, 20);
+		queryField.setBounds(161, 4, 623, 20);
 		contentPane.add(queryField);
 		queryField.setColumns(10);
 		
