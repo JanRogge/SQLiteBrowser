@@ -27,6 +27,8 @@ public class loadtest {
 	    try {
 			ResultSet rs = c.createStatement().executeQuery("SELECT * FROM Country;");
 			while (rs.next()){
+				
+				
 //				System.out.print(rs.getString(1) + "   ");
 //				System.out.print(rs.getString(2) + "   ");
 //				System.out.print(rs.getString(3) + "   ");
