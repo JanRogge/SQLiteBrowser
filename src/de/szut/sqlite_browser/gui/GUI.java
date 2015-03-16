@@ -124,7 +124,7 @@ public class GUI extends JFrame {
 		DefaultMutableTreeNode category = null;
 		DefaultMutableTreeNode book = null;
 		
-		category  = new DefaultMutableTreeNode("Cate");
+		category  = new DefaultMutableTreeNode("Test");
 		top.add(category);
 		
 		book = new DefaultMutableTreeNode("book");
