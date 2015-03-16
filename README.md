@@ -1,2 +1,2 @@
-# sqlite-browser-dqi12-rogge
-SQLITE DQI12
+# SQLite Browser
+Simple SQLite Browser
