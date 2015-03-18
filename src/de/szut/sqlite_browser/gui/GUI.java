@@ -1,44 +1,34 @@
 package de.szut.sqlite_browser.gui;
 
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
 import javax.swing.JTree;
 import javax.swing.JTextField;
+
+import java.awt.GridLayout;
+
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneConstants;
+import javax.swing.JSplitPane;
 import javax.swing.JLabel;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.JCheckBox;
 
 
 public class GUI extends JFrame {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 3950604164601877185L;
-	private JPanel contentPane;
-	private JTextField queryField;
-	private JTable contentTable;
-	private JTextField limitfrom;
-	private JTextField limitto;
-	private JTree contentTree;
-	private JLabel lblConnection;
-	private JCheckBox checkLimit;
-	private JScrollPane scrollpanecontentTabel;
-	private JScrollPane scrollpanecontentTree;
-	private JMenuBar menuBar;
-	private JMenu menuFile;
-	private JMenuItem openFileItem;
+	private JTextField commandField;
+	private JTable dataTable;
+	private JTextField limitFrom;
+	private JTextField limitTo;
+	private JTree databaseTree;
 
 	/**
 	 * Launch the application.
@@ -61,64 +51,84 @@ public class GUI extends JFrame {
 	 */
 	public GUI() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 800, 620);
-		setResizable(false);
+		setBounds(100, 100, 868, 582);
 		
-		menuBar = new JMenuBar();
+		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
-		menuFile = new JMenu("File");
-		menuBar.add(menuFile);
+		JMenu fileMenu = new JMenu("File");
+		menuBar.add(fileMenu);
 		
-		openFileItem = new JMenuItem("Open");
-		menuFile.add(openFileItem);
+		JMenuItem openDatabaseItem = new JMenuItem("Open");
+		fileMenu.add(openDatabaseItem);
+		JPanel panel = new JPanel();
+		setContentPane(panel);
+		panel.setLayout(new BorderLayout(0, 0));
 		
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		JPanel connectionPanel = new JPanel();
+		panel.add(connectionPanel, BorderLayout.SOUTH);
+		connectionPanel.setLayout(new BorderLayout(0, 0));
 		
-		scrollpanecontentTree = new JScrollPane();
-		scrollpanecontentTree.setBounds(5, 4, 146, 536);
-		contentPane.add(scrollpanecontentTree);
+		JLabel lblConnection = new JLabel("MySQL connectet ");
+		lblConnection.setHorizontalAlignment(SwingConstants.RIGHT);
+		connectionPanel.add(lblConnection, BorderLayout.NORTH);
 		
-		scrollpanecontentTabel = new JScrollPane();
-		scrollpanecontentTabel.setBounds(161, 34, 623, 506);
-		contentPane.add(scrollpanecontentTabel);
+		JSplitPane splitPane = new JSplitPane();
+		panel.add(splitPane, BorderLayout.CENTER);
+		
+		JPanel dataPanel = new JPanel();
+		splitPane.setRightComponent(dataPanel);
+		dataPanel.setLayout(new BorderLayout(0, 0));
+		
+		JPanel limitPanel = new JPanel();
+		dataPanel.add(limitPanel, BorderLayout.SOUTH);
+		limitPanel.setLayout(new GridLayout(0, 3, 0, 0));
+		
+		JCheckBox checkBoxLimit = new JCheckBox("Limit");
+		limitPanel.add(checkBoxLimit);
+		
+		limitFrom = new JTextField();
+		limitFrom.setText("von");
+		limitPanel.add(limitFrom);
+		
+		limitTo = new JTextField();
+		limitTo.setText("bis");
+		limitPanel.add(limitTo);
+		
+		JPanel commandPanel = new JPanel();
+		dataPanel.add(commandPanel, BorderLayout.NORTH);
+		commandPanel.setLayout(new BorderLayout(0, 0));
+		
+		commandField = new JTextField();
+		commandPanel.add(commandField);
+		
+		JScrollPane tableScrollPane = new JScrollPane();
+		dataPanel.add(tableScrollPane, BorderLayout.CENTER);
+		
+		dataTable = new JTable();
+		dataTable.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null, null, null, null, null},
+				{null, null, null, null, null, null},
+				{null, null, null, null, null, null},
+				{null, null, null, null, null, null},
+				{null, null, null, null, null, null},
+				{null, null, null, null, null, null},
+				{null, null, null, null, null, null},
+			},
+			new String[] {
+				"New column", "New column", "New column", "New column", "New column", "New column"
+			}
+		));
+		tableScrollPane.setViewportView(dataTable);
+		
+		JScrollPane treeScrollPane = new JScrollPane();
+		splitPane.setLeftComponent(treeScrollPane);
 		
 		DefaultMutableTreeNode top = new DefaultMutableTreeNode("Test");
 		createNodes(top);
-		contentTree = new JTree(top);
-		scrollpanecontentTree.setViewportView(contentTree);
-		
-		queryField = new JTextField();
-		queryField.setBounds(161, 4, 623, 20);
-		contentPane.add(queryField);
-		queryField.setColumns(10);
-		
-		contentTable = new JTable();
-		contentTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		scrollpanecontentTabel.setViewportView(contentTable);
-		contentTable.setModel(new DefaultTableModel(new Object[][] {},new String[] {}));
-		
-		lblConnection = new JLabel("Connection");
-		lblConnection.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblConnection.setBounds(657, 544, 127, 22);
-		contentPane.add(lblConnection);
-		
-		checkLimit = new JCheckBox("Limit");
-		checkLimit.setBounds(5, 544, 75, 23);
-		contentPane.add(checkLimit);
-		
-		limitfrom = new JTextField();
-		limitfrom.setText("von");
-		limitfrom.setBounds(86, 545, 150, 20);
-		contentPane.add(limitfrom);
-		
-		limitto = new JTextField();
-		limitto.setText("bis");
-		limitto.setBounds(248, 545, 150, 20);
-		contentPane.add(limitto);
+		databaseTree = new JTree(top);
+		treeScrollPane.setViewportView(databaseTree);
 	}
 	private void createNodes(DefaultMutableTreeNode top){
 		DefaultMutableTreeNode category = null;
@@ -130,4 +140,5 @@ public class GUI extends JFrame {
 		book = new DefaultMutableTreeNode("book");
 		category.add(book);
 	}
+
 }
