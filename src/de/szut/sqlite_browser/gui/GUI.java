@@ -13,6 +13,7 @@ import java.awt.GridLayout;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreeSelectionModel;
 import javax.swing.JSplitPane;
 import javax.swing.JLabel;
 import javax.swing.JMenuBar;
@@ -69,11 +70,12 @@ public class GUI extends JFrame {
 		panel.add(connectionPanel, BorderLayout.SOUTH);
 		connectionPanel.setLayout(new BorderLayout(0, 0));
 		
-		JLabel lblConnection = new JLabel("MySQL connectet ");
+		JLabel lblConnection = new JLabel("MySQL connected ");
 		lblConnection.setHorizontalAlignment(SwingConstants.RIGHT);
-		connectionPanel.add(lblConnection, BorderLayout.NORTH);
+		connectionPanel.add(lblConnection);
 		
 		JSplitPane splitPane = new JSplitPane();
+		splitPane.setDividerLocation(150);
 		panel.add(splitPane, BorderLayout.CENTER);
 		
 		JPanel dataPanel = new JPanel();
@@ -88,11 +90,11 @@ public class GUI extends JFrame {
 		limitPanel.add(checkBoxLimit);
 		
 		limitFrom = new JTextField();
-		limitFrom.setText("von");
+		limitFrom.setToolTipText("Lower Limit");
 		limitPanel.add(limitFrom);
 		
 		limitTo = new JTextField();
-		limitTo.setText("bis");
+		limitTo.setToolTipText("Upper Limit");
 		limitPanel.add(limitTo);
 		
 		JPanel commandPanel = new JPanel();
@@ -120,25 +122,42 @@ public class GUI extends JFrame {
 				"New column", "New column", "New column", "New column", "New column", "New column"
 			}
 		));
+		dataTable.getTableHeader().setReorderingAllowed(false);
+		dataTable.setAutoResizeMode(dataTable.AUTO_RESIZE_OFF);
 		tableScrollPane.setViewportView(dataTable);
 		
 		JScrollPane treeScrollPane = new JScrollPane();
 		splitPane.setLeftComponent(treeScrollPane);
 		
-		DefaultMutableTreeNode top = new DefaultMutableTreeNode("Test");
+		DefaultMutableTreeNode top = new DefaultMutableTreeNode("Database");
 		createNodes(top);
 		databaseTree = new JTree(top);
+		databaseTree.addTreeSelectionListener(e -> {
+			DefaultMutableTreeNode n = (DefaultMutableTreeNode) databaseTree.getLastSelectedPathComponent();
+			if(n.getChildCount() == 0){
+				System.out.println(n.getUserObject());
+			}
+		} );
+		databaseTree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
 		treeScrollPane.setViewportView(databaseTree);
 	}
 	private void createNodes(DefaultMutableTreeNode top){
 		DefaultMutableTreeNode category = null;
 		DefaultMutableTreeNode book = null;
 		
-		category  = new DefaultMutableTreeNode("Test");
+		category  = new DefaultMutableTreeNode("Welt");
 		top.add(category);
 		
-		book = new DefaultMutableTreeNode("book");
+		book = new DefaultMutableTreeNode("Länder");
 		category.add(book);
+		
+		
+		category = new DefaultMutableTreeNode("Musik");
+		top.add(category);
+		
+		book = new DefaultMutableTreeNode("Title");
+		category.add(book);
+		
 	}
 
 }
