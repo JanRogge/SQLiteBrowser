@@ -14,31 +14,25 @@ public class Connector {
 		}
 	}
 
-	public boolean connection(String path) {
-		try {
-			connection = DriverManager.getConnection("jdbc:sqlite:" + path);
-			return true;
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return false;
-		}
+	public void connection(String path) throws SQLException {
+		connection = DriverManager.getConnection("jdbc:sqlite:" + path);
 	}
-	public ResultSet executeQuery(String query){
-		try {
+
+	public ResultSet executeQuery(String query) throws SQLException {
+		if (connection != null){
 			return connection.createStatement().executeQuery(query);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		}else {
 			return null;
 		}
 	}
-	public void closeConnetion(){
-		try {
+
+	public ResultSet getTables() throws SQLException {
+		return connection.getMetaData().getTables(null, null, "%", null);
+	}
+
+	public void closeConnetion() throws SQLException {
+		if (connection != null){
 			connection.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		}	
 	}
 }
