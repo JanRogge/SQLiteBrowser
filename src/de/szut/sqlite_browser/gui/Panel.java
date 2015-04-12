@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
@@ -59,11 +60,10 @@ public class Panel extends JPanel {
 		limitPanel.setLayout(new GridLayout(0, 3, 0, 0));
 
 		JCheckBox checkBoxLimit = new JCheckBox("Limit");
-		checkBoxLimit.addActionListener(e ->{
-			if (checkBoxLimit.isSelected()){
+		checkBoxLimit.addActionListener(e -> {
+			if (checkBoxLimit.isSelected()) {
 				limit = true;
-			}
-			else{
+			} else {
 				limit = false;
 			}
 			System.out.println(limitFrom.getText());
@@ -94,6 +94,8 @@ public class Panel extends JPanel {
 
 		dataTable = new JTable();
 		dataTable.getTableHeader().setReorderingAllowed(false);
+		dataTable.setAutoCreateRowSorter(true);
+		dataTable.setEnabled(false);
 		tableScrollPane.setViewportView(dataTable);
 
 		JScrollPane treeScrollPane = new JScrollPane();
@@ -104,12 +106,13 @@ public class Panel extends JPanel {
 		databaseTree.addTreeSelectionListener(e -> {
 			DefaultMutableTreeNode n = (DefaultMutableTreeNode) databaseTree
 					.getLastSelectedPathComponent();
-			if(lblConnection.getText().contains("Successful")){
+			if (lblConnection.getText().contains("Successful")) {
 				if (n != null && n.getChildCount() == 0) {
-					model.executeQuery("'" + (String) n.getUserObject() + "'", false);
+					model.executeQuery("'" + (String) n.getUserObject() + "'",
+							false);
 				}
 			}
-			
+
 		});
 		databaseTree.getSelectionModel().setSelectionMode(
 				TreeSelectionModel.SINGLE_TREE_SELECTION);
@@ -135,21 +138,30 @@ public class Panel extends JPanel {
 	public void setStatus(String status) {
 		lblConnection.setText(status);
 	}
-	public void resetTree(){
-		 int x = top.getChildCount();
-         for(int i = 0; i < x; i++) {
-                 top.remove(0);
-         }
-         databaseTree.repaint();
-         databaseTree.collapsePath(new TreePath(top.getPath()));
+
+	public void resetTree() {
+		int x = top.getChildCount();
+		for (int i = 0; i < x; i++) {
+			top.remove(0);
+		}
+		databaseTree.repaint();
+		databaseTree.collapsePath(new TreePath(top.getPath()));
 	}
-	public boolean getLimitStatus(){
+
+	public boolean getLimitStatus() {
 		return limit;
 	}
-	public String getLimitFrom(){
+
+	public String getLimitFrom() {
 		return limitFrom.getText();
 	}
-	public String getLimitTo(){
+
+	public String getLimitTo() {
 		return limitTo.getText();
+	}
+
+	public void errormsg(String error) {
+		JOptionPane.showMessageDialog(this, error, "An Error occurred",
+				JOptionPane.ERROR_MESSAGE);
 	}
 }

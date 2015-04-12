@@ -31,7 +31,7 @@ public class Model {
 			panel.setStatus("Successful connected to " + name + " ");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			panel.errormsg("Failed to Open the Database");
 		}
 	}
 
@@ -141,7 +141,7 @@ public class Model {
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			panel.errormsg("Failed to exectue the Query. Maybe you type something wrong.");
 		}
 	}
 	/***
@@ -155,7 +155,7 @@ public class Model {
 			panel.resetTree();
  		} catch (SQLException e) {
  			// TODO Auto-generated catch block
- 			e.printStackTrace();
+ 			panel.errormsg("Failed to Close the Connection");
  		}
  	}
 	public boolean isNumeric(String limitFrom, String limitTo)  

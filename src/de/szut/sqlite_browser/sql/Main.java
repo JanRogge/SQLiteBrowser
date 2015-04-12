@@ -11,7 +11,8 @@ public class Main {
 		Model model = new Model(panel);
 		panel.setModel(model);
 		Menu menu = new Menu(model);
-		new GUI(menu, panel);
+		PropLoader prop = new PropLoader();
+		new GUI(menu, panel, prop);
 		
 
 
