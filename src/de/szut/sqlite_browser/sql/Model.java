@@ -114,8 +114,6 @@ public class Model {
 				}
 
 			}
-			System.out.println(rows);
-			System.out.println(query1);
 			queryResult = connector.executeQuery(query1);
 			numberofRows = connector.executeQuery(rows);
 			if (queryResult != null) {
