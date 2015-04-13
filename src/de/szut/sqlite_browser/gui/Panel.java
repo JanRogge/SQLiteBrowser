@@ -37,10 +37,10 @@ public class Panel extends JPanel {
 	private boolean limit;
 
 	public Panel() {
-		this.setLayout(new BorderLayout(0, 0));
+		setLayout(new BorderLayout(0, 0));
 
 		JPanel connectionPanel = new JPanel();
-		this.add(connectionPanel, BorderLayout.SOUTH);
+		add(connectionPanel, BorderLayout.SOUTH);
 		connectionPanel.setLayout(new BorderLayout(0, 0));
 
 		lblConnection = new JLabel("No Connection ");
@@ -49,7 +49,7 @@ public class Panel extends JPanel {
 
 		JSplitPane splitPane = new JSplitPane();
 		splitPane.setDividerLocation(150);
-		this.add(splitPane, BorderLayout.CENTER);
+		add(splitPane, BorderLayout.CENTER);
 
 		JPanel dataPanel = new JPanel();
 		splitPane.setRightComponent(dataPanel);
@@ -66,8 +66,6 @@ public class Panel extends JPanel {
 			} else {
 				limit = false;
 			}
-			System.out.println(limitFrom.getText());
-			System.out.println(limit);
 		});
 		limitPanel.add(checkBoxLimit);
 

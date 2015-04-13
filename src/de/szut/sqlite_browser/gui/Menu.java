@@ -16,7 +16,7 @@ public class Menu extends JMenuBar {
 	 * 
 	 */
 	private static final long serialVersionUID = 413811856288548755L;
-	private static final String CHOOSER_TITLE = "Please choose a valid db3 file";
+	private static final String CHOOSER_TITLE = "Please choose a db3 file";
 	private static final String DB_FOLDER = "db";
 	private static final FileFilter DB_FILTER = new FileNameExtensionFilter(
 			"DB3 File", "db3");

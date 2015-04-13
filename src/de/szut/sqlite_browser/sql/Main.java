@@ -13,9 +13,6 @@ public class Main {
 		Menu menu = new Menu(model);
 		PropLoader prop = new PropLoader();
 		new GUI(menu, panel, prop);
-		
-
-
 	}
 }
 	
