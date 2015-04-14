@@ -22,6 +22,7 @@ public class GUI extends JFrame {
 		setContentPane(panel);
 		setJMenuBar(menu);
 		setVisible(true);
+		//Hinzufügen eines WindowListeners um die größe des Frames in die Config Datei zu schrieben
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
 				props.setWindowDimension(getBounds());

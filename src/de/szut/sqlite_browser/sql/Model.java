@@ -163,6 +163,12 @@ public class Model {
 		}
 	}
 
+	/**
+	 * Überprüfung ob im Eingabe feld eine Zahl steht
+	 * @param limitFrom
+	 * @param limitTo
+	 * @return
+	 */
 	public boolean isNumeric(String limitFrom, String limitTo) {
 		try {
 			int from = Integer.parseInt(limitFrom);

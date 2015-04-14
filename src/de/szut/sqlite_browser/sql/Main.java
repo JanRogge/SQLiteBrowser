@@ -6,7 +6,6 @@ import de.szut.sqlite_browser.gui.Panel;
 
 public class Main {
 	public static void main(String[] args) {
-		
 		Panel panel = new Panel();
 		Model model = new Model(panel);
 		panel.setModel(model);

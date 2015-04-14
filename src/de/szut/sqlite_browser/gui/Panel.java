@@ -36,6 +36,9 @@ public class Panel extends JPanel {
 	private JLabel lblConnection;
 	private boolean limit;
 
+	/**
+	 * Mit WindowBuilder erzeugtes JPanel
+	 */
 	public Panel() {
 		setLayout(new BorderLayout(0, 0));
 
@@ -117,6 +120,10 @@ public class Panel extends JPanel {
 		treeScrollPane.setViewportView(databaseTree);
 	}
 
+	/**
+	 * Hinzufügen von Knoten im JTree
+	 * @param tableNames
+	 */
 	public void nodes(ArrayList<String> tableNames) {
 		for (String name : tableNames) {
 			top.add(new DefaultMutableTreeNode(name));
@@ -124,6 +131,11 @@ public class Panel extends JPanel {
 		repaint();
 	}
 
+	/***
+	 * Setzt das Model des JTable
+	 * @param data Daten die im Table stehen sollen
+	 * @param columnNames Name der Spalten
+	 */
 	public void updateDataList(Object[][] data, String[] columnNames) {
 		dataTable.setModel(new DefaultTableModel(data, columnNames));
 		repaint();
@@ -137,6 +149,9 @@ public class Panel extends JPanel {
 		lblConnection.setText(status);
 	}
 
+	/***
+	 * Entfernt alle Einträge aus dem JTree wenn die verbindung getrennt wird
+	 */
 	public void resetTree() {
 		int x = top.getChildCount();
 		for (int i = 0; i < x; i++) {
